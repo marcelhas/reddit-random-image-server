@@ -32,6 +32,7 @@
     "eslint-plugin-standard": "^4.0.1"
   },
   "dependencies": {
+    "dayjs": "^1.11.11",
     "pino": "^6.3.2",
     "pino-http": "^5.2.0",
     "reddit-simple": "^2.1.1",

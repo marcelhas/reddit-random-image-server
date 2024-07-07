@@ -28,6 +28,7 @@ async function getRandomPlantPic() {
     const url = (
       post &&
       post.data &&
+      !post.data.is_video &&
       post.data.preview &&
       post.data.preview.images[0] &&
       post.data.preview.images[0].source &&

@@ -5,6 +5,7 @@ const { RedditSimple } = require('reddit-simple')
 const { Client } = require('undici')
 const logger = require('pino')()
 const httpLogger = require('pino-http')({ logger })
+const { fetchRandomTopPost } = require("./reddit.js")
 const dayjs = require('dayjs')
 
 const PORT = Number.parseInt(process.env.PORT, 10) || 8000
@@ -22,14 +23,14 @@ async function getRandomPlantPic() {
   }
 
   while (true) {
-    const resp = await RedditSimple.RandomPost(SUBREDDIT)
+    const post = await fetchRandomTopPost(SUBREDDIT, "month")
     const url = (
-      resp[0] &&
-      resp[0].data &&
-      resp[0].data.preview &&
-      resp[0].data.preview.images[0] &&
-      resp[0].data.preview.images[0].source &&
-      resp[0].data.preview.images[0].source.url
+      post &&
+      post.data &&
+      post.data.preview &&
+      post.data.preview.images[0] &&
+      post.data.preview.images[0].source &&
+      post.data.preview.images[0].source.url
     )
 
     if (url) {

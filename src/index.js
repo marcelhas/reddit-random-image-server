@@ -36,6 +36,7 @@ async function getRandomPlantPic() {
     )
 
     if (url) {
+      console.log(subreddit)
       console.log(url)
       cleanUrl = url.replace('&amp;', '&')
       if ((timestamp == null) || (cache == null)) {

@@ -10,7 +10,7 @@ const dayjs = require('dayjs')
 
 const PORT = Number.parseInt(process.env.PORT, 10) || 8000
 const ADDRESS = process.env.ADDRESS || '0.0.0.0'
-const SUBREDDIT = process.env.SUBREDDIT || 'EarthPorn'
+const SUBREDDITS = (process.env.SUBREDDITS || 'EarthPorn,pics,ProgrammerHumor').split(",")
 
 let cache = undefined
 let timestamp = undefined
@@ -21,9 +21,10 @@ async function getRandomPlantPic() {
     console.log(`Reusing cache from ${timestamp.toISOString()}!`)
     return cache
   }
+  const subreddit = SUBREDDITS[Math.floor(Math.random() * SUBREDDITS.length)]
 
   while (true) {
-    const post = await fetchRandomTopPost(SUBREDDIT, "month")
+    const post = await fetchRandomTopPost(subreddit, "month")
     const url = (
       post &&
       post.data &&
@@ -34,6 +35,7 @@ async function getRandomPlantPic() {
     )
 
     if (url) {
+      console.log(url)
       cleanUrl = url.replace('&amp;', '&')
       if ((timestamp == null) || (cache == null)) {
         cache = cleanUrl

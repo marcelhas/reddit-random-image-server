@@ -29,6 +29,9 @@ async function getRandomPlantPic() {
       post &&
       post.data &&
       !post.data.is_video &&
+      post.data.url &&
+      !post.data.url.endsWith("gif") &&
+      !post.data.url.endsWith("gifv") &&
       post.data.preview &&
       post.data.preview.images[0] &&
       post.data.preview.images[0].source &&

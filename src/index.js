@@ -32,6 +32,8 @@ async function getRandomPlantPic() {
       post.data.url &&
       !post.data.url.endsWith("gif") &&
       !post.data.url.endsWith("gifv") &&
+      post.data.domain &&
+      !post.data.domain.includes("gif") &&
       post.data.preview &&
       post.data.preview.images[0] &&
       post.data.preview.images[0].source &&
